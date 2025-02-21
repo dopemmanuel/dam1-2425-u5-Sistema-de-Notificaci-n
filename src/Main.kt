@@ -1,32 +1,50 @@
 package com.dam1.eju5.src
 
-import com.dam1.eju5.src.clases.Blog
-import com.dam1.eju5.src.clases.Libro
-import com.dam1.eju5.src.clases.Revista
+//import com.dam1.eju5.src.clases
+//import com.dam1.eju5.src.clases
+//import com.dam1.eju5.src.clases
 
 /**
-Ejercicio 4: Sistema de Publicaciones
-Crea una jerarquía de clases para modelar un sistema de publicaciones:
+Ejercicio 4: Sistema de Notificación
+Diseña una interfaz Notificable con un método enviarNotificacion(). Implementa esta interfaz en clases
+como CorreoElectronico, MensajeTexto, y NotificacionPush. Cada clase debe tener una implementación
+específica de enviarNotificacion(), simulando el envío de la notificación a través del canal apropiado.
 
-Clase Publicacion con atributos como título y autor, y métodos mostrarInformacion().
-Subclases Libro, Revista y Blog, con atributos y métodos específicos.
-Ejemplo de atributos adicionales:
+En el programa principal, crea una lista de tipo Notificable llamada notificaciones y en ella crea un
+objeto de cada clase. Recorre la lista enviando una notificación con cada elemento.
 
-Libro: numPaginas, isbn
-Revista: numeroEdicion, fechaPublicacion
-Blog: url, fechaPublicacion
 Objetivos:
-Reforzar el uso de herencia para especializar clases.
-Aplicar la sobreescritura de métodos (override).
-Diferenciar entre clases base y derivadas en un sistema real.
+Aprender a utilizar interfaces para definir un comportamiento común entre varias clases.
+Entender el beneficio de usar interfaces para permitir que diferentes clases sean tratadas de manera uniforme.
+Practicar el diseño de sistemas flexibles donde se pueden agregar nuevos tipos de notificaciones sin modificar el código que utiliza la interfaz Notificable.
  * */
+interface Notificable {
+    fun enviarNotificacion(): String
+}
+
+class CorreoEletronico(): Notificable {
+    override fun enviarNotificacion(): String {
+        return "Has Recibido un correo!!."
+    }
+}
+class MensajeTexto(): Notificable {
+
+    override fun enviarNotificacion(): String {
+        return "Has Recibido Mensaje de Maria!!."
+    }
+}
+class NotificacionPush(): Notificable {
+    override fun enviarNotificacion(): String {
+        return "Alerta! Se ha detectado movimiento en la camara 2"
+    }
+}
 
 fun main(){
-    val libro = Libro("El Hobbit", "J.R.R. Tolkien", 310, "978-84-450-7171-7")
-    val revista = Revista("National Geographic", "Varios", 101, "Febrero 2025")
-    val blog = Blog("Aprendiendo Kotlin", "Juan Pérez", "www.kotlinblog.com", "18-02-2025")
+    val correo  = CorreoEletronico()
+    val mensaje = MensajeTexto()
+    val notifPush = NotificacionPush()
 
-    libro.mostrarInformacion()
-    revista.mostrarInformacion()
-    blog.mostrarInformacion()
+    val notificacion: List<Notificable> = listOf(correo, mensaje, notifPush)
+
+    notificacion.forEach { println(it.enviarNotificacion()) }
 }
