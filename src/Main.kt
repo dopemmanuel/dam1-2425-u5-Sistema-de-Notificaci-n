@@ -1,8 +1,9 @@
 package com.dam1.eju5.src
 
-//import com.dam1.eju5.src.clases
-//import com.dam1.eju5.src.clases
-//import com.dam1.eju5.src.clases
+import com.dam1.eju5.src.interfaces.Notificable
+import com.dam1.eju5.src.clases.CorreoEletronico
+import com.dam1.eju5.src.clases.MensajeTexto
+import com.dam1.eju5.src.clases.NotificacionPush
 
 /**
 Ejercicio 4: Sistema de Notificación
@@ -18,26 +19,6 @@ Aprender a utilizar interfaces para definir un comportamiento común entre varia
 Entender el beneficio de usar interfaces para permitir que diferentes clases sean tratadas de manera uniforme.
 Practicar el diseño de sistemas flexibles donde se pueden agregar nuevos tipos de notificaciones sin modificar el código que utiliza la interfaz Notificable.
  * */
-interface Notificable {
-    fun enviarNotificacion(): String
-}
-
-class CorreoEletronico(): Notificable {
-    override fun enviarNotificacion(): String {
-        return "Has Recibido un correo!!."
-    }
-}
-class MensajeTexto(): Notificable {
-
-    override fun enviarNotificacion(): String {
-        return "Has Recibido Mensaje de Maria!!."
-    }
-}
-class NotificacionPush(): Notificable {
-    override fun enviarNotificacion(): String {
-        return "Alerta! Se ha detectado movimiento en la camara 2"
-    }
-}
 
 fun main(){
     val correo  = CorreoEletronico()
